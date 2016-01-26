@@ -1,0 +1,73 @@
+<title>My Little Game with Sounds</title>
+
+<!-- copy and paste the next 2 lines to setup the sound files, you must modify the loadsoundchrome.js file with your sounds -->
+<script type="text/javascript" src="script/soundmanager2.js"></script>
+<script type="text/javascript" src="script/loadsoundchrome.js"></script>
+<!-- Stop copying here -->
+
+<center>
+	<script type="text/javascript" src="script/processing-1.4.1.js"></script>
+	<script type="text/processing" data-processing-target="mycanvas">
+
+	/* @pjs globalKeyEvents ="true"; */
+	
+PImage beaker;
+int beakerX;
+int beakerY;
+int distanceX;
+int distanceY;
+boolean findStartingValue;
+boolean inImage;
+
+void setup()
+{
+	size(700, 500);
+
+	beakerX = 50;
+	beakerY = 50;
+	findStartingValue = true;
+	inImage = false;
+	beaker = loadImage("images/beaker.png");
+	
+}
+
+void draw()
+{
+	background(0,0,0);
+
+	image(beaker,beakerX,beakerY);
+
+	if (mouseX > beakerX && mouseX < beakerX + 61 &&
+	    mouseY > beakerY && mouseY < beakerY + 70)
+	{
+		inImage = true;
+	}
+
+	if (mousePressed == true && mouseButton == LEFT && inImage == true)
+	{
+
+		if (findStartingValue == true)
+		{
+			distanceX = mouseX - beakerX;
+			distanceY = mouseY - beakerY;
+			findStartingValue = false;
+		}
+		beakerX = mouseX - distanceX;
+		beakerY = mouseY - distanceY;
+	}
+	else
+	{
+		findStartingValue = true;
+		inImage = false;
+	}
+	
+
+}
+
+
+
+</script>
+<canvas id="mycanvas"></canvas>
+</center>
+
+
